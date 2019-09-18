@@ -109,8 +109,7 @@ impl Game {
 
     fn maximized_move(&mut self) -> (usize, isize) {
         let mut curr_score: isize;
-        let mut best_move: usize = 0;
-        let mut best_score: isize = -1;
+        let (mut best_move, mut best_score) = (0usize, -1isize);
         for &v in self.get_free_positions().iter() {
             self.mark(self.ai_marker, v);
             if self.game_over() {
