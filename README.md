@@ -1,5 +1,5 @@
 # A simple Tic Tac Toe engine written in Rust
-This tictactoe engine uses an minimax implementation and doesn't use any extra dependencies.
+This tictactoe engine written in Rust and uses an minimax implementation.
 
 To build and run the program:
 ```
