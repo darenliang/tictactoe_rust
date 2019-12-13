@@ -6,7 +6,7 @@ To build and run the program:
 cd src
 rustc main.rs
 ./main           <= For Linux and macOS
-./main.exe       <= For Windows
+main.exe       <= For Windows
 ```
 
 Format:
