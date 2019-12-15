@@ -15,7 +15,14 @@ impl Game {
             board: [0; 9],
             winner: 0,
             last_moves: Vec::new(),
-            win_positions: [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]],
+            win_positions: [[0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]],
             human_marker: 1,
             ai_marker: -1,
         }
@@ -59,7 +66,9 @@ impl Game {
 
     fn game_over(&mut self) -> bool {
         for i in 0..8 {
-            if self.board[self.win_positions[i][0]] != 0 && self.board[self.win_positions[i][0]] == self.board[self.win_positions[i][1]] && self.board[self.win_positions[i][1]] == self.board[self.win_positions[i][2]] {
+            if self.board[self.win_positions[i][0]] != 0 &&
+                self.board[self.win_positions[i][0]] == self.board[self.win_positions[i][1]] &&
+                self.board[self.win_positions[i][1]] == self.board[self.win_positions[i][2]] {
                 self.winner = self.board[self.win_positions[i][0]];
                 return true;
             }
