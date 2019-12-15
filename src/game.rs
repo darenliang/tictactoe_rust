@@ -1,5 +1,6 @@
 use std::io;
 
+// Game contains all the relevant information for a game
 pub struct Game {
     board: [isize; 9],
     winner: isize,
@@ -9,7 +10,9 @@ pub struct Game {
     ai_marker: isize,
 }
 
+// Game implements the following methods and functions
 impl Game {
+    // new creates new Game
     pub fn new() -> Game {
         Game {
             board: [0; 9],
@@ -28,6 +31,7 @@ impl Game {
         }
     }
 
+    // print_board prints current Game board
     fn print_board(&self) {
         for i in 0..9 {
             if i % 3 == 0 && i != 0 {
@@ -38,6 +42,7 @@ impl Game {
         println!();
     }
 
+    // get_free_positions gets all free positions
     fn get_free_positions(&self) -> Vec<usize> {
         let mut free_moves: Vec<usize> = Vec::new();
         for i in 0..9 {
@@ -48,11 +53,13 @@ impl Game {
         free_moves
     }
 
+    // mark makes move and adds move to last_moves
     fn mark(&mut self, marker: isize, pos: usize) {
         self.board[pos] = marker;
         self.last_moves.push(pos);
     }
 
+    // revert_last_move reverts last move made
     fn revert_last_move(&mut self) {
         let pop = self.last_moves.pop();
         let mut index: usize = 0;
@@ -64,6 +71,7 @@ impl Game {
         self.winner = 0;
     }
 
+    // game_over sets the game to game over
     fn game_over(&mut self) -> bool {
         for i in 0..8 {
             if self.board[self.win_positions[i][0]] != 0 &&
@@ -80,6 +88,7 @@ impl Game {
         false
     }
 
+    // move_human makes move as human
     fn move_human(&mut self) {
         let move_human: usize;
         loop {
@@ -111,11 +120,13 @@ impl Game {
         self.mark(self.human_marker, move_human);
     }
 
+    // move_ai makes move as ai
     fn move_ai(&mut self) {
         let (move_position, _) = self.maximized_move();
         self.mark(self.ai_marker, move_position)
     }
 
+    // maximized_move finds move that maximizes score
     fn maximized_move(&mut self) -> (usize, isize) {
         let mut curr_score: isize;
         let (mut best_move, mut best_score) = (0usize, -1isize);
@@ -135,6 +146,7 @@ impl Game {
         (best_move, best_score)
     }
 
+    // minimized_move finds move that minimizes score
     fn minimized_move(&mut self) -> (usize, isize) {
         let mut curr_score: isize;
         let mut best_move: usize = 0;
@@ -155,6 +167,7 @@ impl Game {
         (best_move, best_score)
     }
 
+    // get_score gets score of current Game
     fn get_score(&mut self) -> isize {
         if self.game_over() {
             if self.winner == self.ai_marker {
@@ -166,6 +179,7 @@ impl Game {
         0
     }
 
+    // play plays Game
     pub fn play(&mut self, f: isize) {
         for i in 0..9 {
             self.print_board();
